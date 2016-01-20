@@ -1,6 +1,4 @@
-Sb 3 0
-
-Smashing Boxes Website
+smashingboxes.com v3.0
 
 Setup
 -----
@@ -8,10 +6,18 @@ Setup
 - make sure [node.js](http://nodejs.org) and [roots](http://roots.cx) are installed
 - clone this repo down and `cd` into the folder
 - run `npm install`
+- Add contentful keys to the `.env` file (see example)
 - run `roots watch`
-- ???
-- get money
 
+Contentful and Netlify Keys
+---------------------------
+
+You will need the contentful keys to build the site locally. Those can be found
+on passpack.
+
+To deploy from your local machine you will need the access key also found in
+passpack, however the app will automatically deploy from Netlify if the github
+repo is updates or content is changed in Contentful.
 
 Deployment
 ----------
