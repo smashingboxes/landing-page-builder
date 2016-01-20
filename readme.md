@@ -15,9 +15,9 @@ Contentful and Netlify Keys
 You will need the contentful keys to build the site locally. Those can be found
 on passpack.
 
-To deploy from your local machine you will need the access key also found in
+To deploy from your local machine you will need the Netlify access key also found in
 passpack, however the app will automatically deploy from Netlify if the github
-repo is updates or content is changed in Contentful.
+repo is updated or content is changed in Contentful.
 
 Deployment
 ----------
@@ -25,3 +25,16 @@ Deployment
 This site is hosted at Netlify.
 
 Run `make deploy` to deploy the site. This command is a shortcut for compiling the site with roots and deploying using [ship](https://github.com/carrot/ship). See the [Makefile](Makefile) for more info.
+
+How This Thing Works
+--------------------
+
+Changes in Github or Contentful kick off a build on Netlify via webhooks
+
+_________
+| Github |---commit----------------|
+---------                          |      _________
+                                   |----->| Netlify|
+_____________                      |      ---------
+| Contentful |---update published--|
+-------------
