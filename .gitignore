@@ -3,3 +3,4 @@ node_modules
 public
 .env
 ship.conf
+npm-debug.log

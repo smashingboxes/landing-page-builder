@@ -3,11 +3,12 @@ smashingboxes.com v3.0
 Setup
 -----
 
-- make sure [node.js](http://nodejs.org) and [roots](http://roots.cx) are installed
+- Node 0.10 or > required
+- Roots installed globally optional
 - clone this repo down and `cd` into the folder
 - run `npm install`
 - Add contentful keys to the `.env` file (see example)
-- run `roots watch`
+- run `roots watch` or `npm run roots watch`
 
 Contentful and Netlify Keys
 ---------------------------
@@ -33,8 +34,8 @@ Changes in Github or Contentful kick off a build on Netlify via webhooks
 
 _________
 | Github |---commit----------------|
----------                          |      _________
-                                   |----->| Netlify|
-_____________                      |      ---------
+---------                          |      _________      _______________
+                                   |----->| Netlify| --->| Static Files |
+_____________                      |      ---------      ---------------
 | Contentful |---update published--|
 -------------

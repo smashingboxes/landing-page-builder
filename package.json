@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "dotenv": "^1.2.0"
+  },
+  "scripts": {
+    "roots": "roots"
   }
 }
