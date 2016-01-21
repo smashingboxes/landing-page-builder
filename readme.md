@@ -31,7 +31,7 @@ How This Thing Works
 --------------------
 
 Changes in Github or Contentful kick off a build on Netlify via webhooks
-
+```
 _________
 | Github |---commit----------------|
 ---------                          |      _________      _______________
@@ -39,3 +39,4 @@ _________
 _____________                      |      ---------      ---------------
 | Contentful |---update published--|
 -------------
+```
