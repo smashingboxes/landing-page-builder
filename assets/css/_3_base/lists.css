@@ -1,0 +1,51 @@
+/* ==========================================================================
+ * Lists
+ * ========================================================================== */
+
+@define-mixin default-ul {
+  list-style-type: disc;
+  margin-bottom: 1vr;
+  padding-left: 0.75vr;
+
+  > li > ul {
+    margin-bottom: 0 !important;
+  }
+}
+
+@define-mixin default-ol {
+  list-style-type: decimal;
+  margin-bottom: 1vr;
+  padding-left: 0.75vr;
+
+  > li > ol {
+    margin-bottom: 0 !important;
+  }
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &.default-ul {
+    @mixin default-ul;
+  }
+
+  &.default-ol {
+    @mixin default-ol;
+  }
+}
+
+dl {
+  margin-bottom: 1vr;
+
+  dt {
+    font-weight: bold;
+    margin-top: 1vr;
+  }
+
+  dd {
+    margin: 0;
+  }
+}

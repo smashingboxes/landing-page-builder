@@ -1,0 +1,37 @@
+/* ==========================================================================
+ * Base
+ * ========================================================================== */
+
+:root {
+  /* Sizes */
+  --base-border-radius: 3px;
+
+  /* Font Colors */
+  --base-font-color: #fff;
+
+  /* Border */
+  --base-border-color: var(--gray);
+  --base-border: 1px solid var(--base-border-color);
+  --base-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+
+  /* Background Colors */
+  --base-background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
+html,
+body {
+  position: relative;
+}
+
+body {
+  background: var(--base-background-color);
+}

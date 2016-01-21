@@ -1,0 +1,111 @@
+/* ==========================================================================
+ * Typography
+ * ========================================================================== */
+
+:root {
+  /* Fonts Families */
+  --primary-font-family: 'Gotham', sans-serif;
+  --secondary-font-family: 'Roboto Mono', serif;
+
+  /* Font Sizes */
+  --base-font-size: 16px;
+  --font-size-xxl: 60px;
+  --font-size-xl: 40px;
+  --font-size-lg: 30px;
+  --font-size-med: var(--base-font-size);
+  --font-size-sm: 12px;
+  --font-size-xs: 10px;
+  --font-size-xxs: 8px;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Line Height */
+  --base-line-height: 1.5;
+  --heading-line-height: 1.2;
+}
+
+body {
+  color: var(--base-font-color);
+  font-family: var(--secondary-font-family);
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-light);
+  line-height: var(--base-line-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--primary-font-family);
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--base-line-height);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-light);
+}
+
+.h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-light);
+}
+
+.h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+}
+
+.h4 {
+  font-size: var(--font-size-med);
+  font-weight: var(--font-weight-bold);
+}
+
+.h5 {
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-bold);
+}
+
+.h6 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+p {
+  margin: 0 0 0.5vr;
+}
+
+a {
+  color: var(--primary-action-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+hr {
+  border-bottom: var(--base-border);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: 1vr 0;
+}
+
+img,
+picture {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  img[src*=".svg"] {
+    width: 100%;
+  }
+}

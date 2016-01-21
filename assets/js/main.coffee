@@ -4,3 +4,10 @@ require.config
 
 require ['jquery'], ($) ->
   console.log 'jquery loaded'
+
+  $headerHeight = $('.header').outerHeight()
+  $hero = $('.hero')
+
+  $hero.css('padding-top': $headerHeight + 'px')
+
+  console.log($headerHeight)

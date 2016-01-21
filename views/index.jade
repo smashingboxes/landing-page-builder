@@ -1,16 +1,45 @@
 extends layout
 
 block content
-  h3 Welcome to roots!
-  ul
-    - for hello in contentful.hello
-      li
-        h4= hello.content
-
-  :markdown
-    Find tutorials and documentation at http://roots.cx : )
-
-  // Once you've added a content type and posts into Contentful
-  // go update your app.coffee config and then test out iterating
-  // over your content type here!
-
+  include ./_header.jade
+  
+  section.hero
+    .container
+      h1 Smashing Boxes is a digital product agency
+  
+  //- section
+  //-   .container
+  //-     h2 Web
+  //-     h2 Mobile
+  //-     h2 IOT
+  //- 
+  //- section
+  //-   .container
+  //-     ul
+  //-       li Mobile
+  //-       li Design
+  //-       li UX
+  //-     h3 Throw
+  //-     p A collaborative group photo sharing experience that lets people know what's happening right now.
+  //-     a Learn More
+  //-   
+  //- section
+  //-   .container
+  //-     ul
+  //-       li Mobile
+  //-       li Design
+  //-       li iOS
+  //-     h3 CRNT
+  //-     p A minimalist app that helps surfers figure out current surf conditions and find the best waves.
+  //-     a Learn More
+  //-   
+  //- section 
+  //-   .container
+  //-     h3 Entrepreneur names SB among best entrepreneurial companies
+  //-     p Lorem ipsum
+  //-     a Continue Reading
+  //-   
+  //- section
+  //-   .container
+  //-     h3 Let's Work Together
+  //-     a Partner With Us

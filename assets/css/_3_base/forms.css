@@ -1,0 +1,79 @@
+/* ==========================================================================
+ * Forms
+ * ========================================================================== */
+
+:root {
+  --input-color: var(--base-font-color);
+  --input-font-size: var(--base-font-size);
+
+  --label-color: var(--base-font-color);
+  --label-font-size: var(--font-size-xs);
+}
+
+fieldset {
+  border: var(--base-border);
+  margin: 0 0 0.5vr;
+  padding: 1vr;
+}
+
+::placeholder {
+  color: var(--base-font-color);
+}
+
+label {
+  margin-bottom: 0.5vr;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input:not([type]),
+textarea,
+select {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 0 0 0.25vr 0;
+  padding: 0.25vr;
+  appearance: none;
+  background: var(--base-background-color);
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: var(--base-font-color);
+  font-family: var(--primary-font-family);
+  font-size: 16px; /* Min font size for mobile */
+  line-height: var(--base-line-height);
+  order: 2;
+  transition: none var(--base-duration) var(--base-timing);
+  transition-property: border-color, color;
+
+  @media screen and (min-width: 768px) {
+    font-size: var(--base-font-size);
+  }
+}
+
+textarea {
+  overflow: hidden !important;
+  resize: none;
+}
+
+select {
+  padding-right: 1vr;
+  cursor: pointer;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
