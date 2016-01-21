@@ -1,0 +1,41 @@
+/* ==========================================================================
+ * Header
+ * ========================================================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 1vr;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 2vr;
+  }
+}
+
+.logo {
+  @mixin ir;
+  display: block;
+  width: 60px;
+  height: 70px;
+  background-image: svg("sb-logo", "[fill]: #fff");
+}
+
+.site-nav {
+  position: absolute;
+  top: 0;
+  right: 0.5vr;
+
+  @media screen and (min-width: 768px) {
+    right: 1.5vr;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    padding: 0.5vr;
+    text-transform: lowercase;
+  }
+}
