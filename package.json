@@ -25,14 +25,16 @@
     "morgan": "~1.6.1"
   },
   "devDependencies": {
+    "chai": "^3.4.1",
     "dotenv": "^1.2.0",
     "eslint": "^1.10.3",
-    "nodemon": "^1.8.1"
+    "mocha": "^2.4.4",
+    "nodemon": "^1.8.1",
+    "request": "^2.69.0"
   },
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "eslint ./server ./assets/js",
+    "test": "eslint ./server ./assets/js ./spec && mocha ./spec/**/*spec.js",
     "roots": "roots"
-
   }
 }
