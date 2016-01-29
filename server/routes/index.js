@@ -1,13 +1,16 @@
+'use strict';
+
 const express = require('express');
+const redisClient = require('../utils/redisClient');
+const WorkableJob = require('../models/workableJob');
 const router = express.Router();
 
-/* GET root route. */
-router.get('/', function(_req, res) {
-  res.json({ test: 'works' });
-});
-
-router.get('/jobs', function(_req, res) {
-  res.json({ test: 'works' });
+router.get('/jobs', function(_req, res, next) {
+  const workableJob = new WorkableJob();
+  redisClient.cacheFetch('publishedjobs', () => {
+    return workableJob.getPublishedJobs();
+  }).then((jobs) => { res.json({ data: jobs }); })
+    .catch((err) => { next(err); });
 });
 
 module.exports = router;

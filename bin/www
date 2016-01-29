@@ -7,6 +7,15 @@
 var app = require('../server/app');
 var debug = require('debug')('sb-3-0-api:server');
 var http = require('http');
+var redisClient = require('../server/utils/redisClient.js').client;
+
+/**
+  * Notify that redis is connected
+  */
+
+redisClient.on('connect', function() {
+  debug("Redis Connected");
+});
 
 /**
  * Get port from environment and store in Express.
