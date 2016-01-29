@@ -13,16 +13,12 @@ class WorkableJob {
       qs: { state: 'published'},
       headers: { Authorization: `Bearer ${this.token}` }
     };
+    this.getPublishedJobs = this._getPublishedJobs.bind(this);
   }
 
-  getPublishedJobs() {
+  _getPublishedJobs() {
     this.requestOptions.uri = `${this.baseUrl}/jobs`;
-
-    return new Promise((resolve, reject) => {
-      request(this.requestOptions)
-        .then((data) => { resolve(data.jobs); })
-        .catch((err) => { reject(err); });
-    });
+    return request(this.requestOptions).then((data) => { return data.jobs; });
   }
 }
 

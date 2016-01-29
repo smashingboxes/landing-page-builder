@@ -19,13 +19,13 @@ describe('GET /jobs', () => {
 
   before(() => {
     server = app.listen(port);
-  });
-
-  beforeEach((done) => {
     mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
     // second request will error if not cached
     mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
     mockWorkableJobs().replyWithError('should not have been called');
+  });
+
+  beforeEach((done) => {
     redisClient.flushdb(() => { done(); });
   });
 
@@ -47,6 +47,5 @@ describe('GET /jobs', () => {
 
   after(() => {
     server.close();
-    redisClient.quit();
   });
 });

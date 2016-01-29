@@ -37,6 +37,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "eslint ./server ./assets/js ./spec && mocha ./spec/**/*spec.js",
-    "roots": "roots"
+    "roots": "roots",
+    "mocha": "mocha"
   }
 }

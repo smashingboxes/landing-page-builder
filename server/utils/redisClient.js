@@ -11,14 +11,13 @@ class RedisClient {
   cacheFetch(key, promise) {
     return new Promise((resolve, reject) => {
       this.client.get(key, (err, reply) => {
-        this.rejectErr(err, reject);
+        if (err !== null) { reject(err); }
 
         if (reply === null) {
           promise()
             .then((data) => {
-              this.client.set(key, JSON.stringify(data));
+              this.client.set(key, JSON.stringify(data), () => { resolve(data); });
               this.client.expire(key, cacheTime);
-              resolve(data);
             })
             .catch((promiseErr) => { reject(promiseErr); });
         } else {
@@ -26,10 +25,6 @@ class RedisClient {
         }
       });
     });
-  }
-
-  rejectErr(err, reject) {
-    if (err !== null) { reject(err); }
   }
 }
 
