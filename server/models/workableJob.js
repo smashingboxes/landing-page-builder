@@ -18,7 +18,16 @@ class WorkableJob {
 
   _getPublishedJobs() {
     this.requestOptions.uri = `${this.baseUrl}/jobs`;
-    return request(this.requestOptions).then((data) => { return data.jobs; });
+    return request(this.requestOptions)
+      .then((data) => { return data.jobs; })
+      .then((jobs) => {
+        return jobs.map((job) => {
+          job.slug = job.title.toLowerCase()
+            .replace(/[^a-z0-9]/gi, '-')
+            .replace(/-+/gi, '-');
+          return job;
+        });
+      });
   }
 }
 

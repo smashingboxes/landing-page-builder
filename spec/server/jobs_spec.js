@@ -19,13 +19,12 @@ describe('GET /jobs', () => {
 
   before(() => {
     server = app.listen(port);
-    mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
-    // second request will error if not cached
-    mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
-    mockWorkableJobs().replyWithError('should not have been called');
   });
 
   beforeEach((done) => {
+    nock.restore();
+    mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
+    mockWorkableJobs().replyWithError('should not have been called');
     redisClient.flushdb(() => { done(); });
   });
 
@@ -43,6 +42,14 @@ describe('GET /jobs', () => {
       .then(() => { return request(requestOptions); })
       .then(() => { done(); })
       .catch((err) => { done(err); });
+  });
+
+  it('includes a slug on the jobs', (done) => {
+    requestOptions.uri = 'http://localhost:3000/jobs';
+    request(requestOptions).then((body) => {
+      expect(body.data[0].slug).to.equal('product-director');
+      done();
+    });
   });
 
   after(() => {

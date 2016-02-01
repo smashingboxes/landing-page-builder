@@ -3,6 +3,7 @@
   "description": "Smashing Boxes Website",
   "dependencies": {
     "accord": "^0.21.0",
+    "bluebird": "^3.2.1",
     "body-parser": "~1.13.2",
     "coffee-script": "1.9.x",
     "debug": "~2.2.0",

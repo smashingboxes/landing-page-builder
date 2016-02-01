@@ -4,9 +4,8 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-const routes = require('./routes/index');
-
 const app = express();
+const routes = require('./routes/jobs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

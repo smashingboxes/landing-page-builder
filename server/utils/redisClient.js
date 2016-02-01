@@ -1,30 +1,52 @@
 'use strict';
 
 const redis = require('redis');
+const bluebird = require('bluebird');
+bluebird.promisifyAll(redis.RedisClient.prototype);
 const cacheTime = 3600; // 1 hour
+
+
+class CacheMissError extends Error { }
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient();
+    this._setClient();
   }
 
   cacheFetch(key, promise) {
-    return new Promise((resolve, reject) => {
-      this.client.get(key, (err, reply) => {
-        if (err !== null) { reject(err); }
+    return this._getKey(key)
+      .catch(CacheMissError, this._resolveCacheMiss.bind(this, key, promise))
+      .then(this._setKey.bind(this, key));
+  }
 
-        if (reply === null) {
-          promise()
-            .then((data) => {
-              this.client.set(key, JSON.stringify(data), () => { resolve(data); });
-              this.client.expire(key, cacheTime);
-            })
-            .catch((promiseErr) => { reject(promiseErr); });
-        } else {
-          resolve(JSON.parse(reply));
-        }
-      });
+  _resolveCacheMiss(key, promise) {
+    return promise()
+      .then((data) => { return JSON.stringify(data); })
+      .catch(() => { return this.client.getAsync(`${key}bak`); })
+      .then((reply) => { return JSON.parse(reply); });
+  }
+
+  _getKey(key) {
+    return this.client.getAsync(key).then((reply) => {
+      if (reply === null) { throw new CacheMissError('cache miss'); }
+      return JSON.parse(reply);
     });
+  }
+
+  _setKey(key, data) {
+    this.client.expire(key, cacheTime);
+    this.client.set(`${key}bak`, JSON.stringify(data));
+    this.client.set(key, JSON.stringify(data));
+
+    return data;
+  }
+
+  _setClient() {
+    this.client = redis.createClient();
+  }
+
+  _closeClient() {
+    this.client.end(true);
   }
 }
 
