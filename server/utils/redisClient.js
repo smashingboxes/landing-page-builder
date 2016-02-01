@@ -16,29 +16,29 @@ class RedisClient {
   cacheFetch(key, promise) {
     return this._getKey(key)
       .catch(CacheMissError, this._resolveCacheMiss.bind(this, key, promise))
-      .then(this._setKey.bind(this, key));
+      .then(reply => JSON.parse(reply));
   }
 
   _resolveCacheMiss(key, promise) {
     return promise()
-      .then((data) => { return JSON.stringify(data); })
-      .catch(() => { return this.client.getAsync(`${key}bak`); })
-      .then((reply) => { return JSON.parse(reply); });
+      .then(data => JSON.stringify(data))
+      .then(this._setKey.bind(this, key))
+      .catch(() => this.client.getAsync(`${key}bak`));
   }
 
   _getKey(key) {
     return this.client.getAsync(key).then((reply) => {
       if (reply === null) { throw new CacheMissError('cache miss'); }
-      return JSON.parse(reply);
+      return reply;
     });
   }
 
-  _setKey(key, data) {
+  _setKey(key, value) {
     this.client.expire(key, cacheTime);
-    this.client.set(`${key}bak`, JSON.stringify(data));
-    this.client.set(key, JSON.stringify(data));
+    this.client.set(`${key}bak`, value);
+    this.client.set(key, value);
 
-    return data;
+    return value;
   }
 
   _setClient() {
