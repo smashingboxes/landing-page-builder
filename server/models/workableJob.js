@@ -22,12 +22,20 @@ class WorkableJob {
       .then(data => data.jobs)
       .then((jobs) => {
         return jobs.map((job) => {
-          job.slug = job.title.toLowerCase()
-            .replace(/[^a-z0-9]/gi, '-')
-            .replace(/-+/gi, '-');
+          job.slug = this._slugify(job.title);
           return job;
         });
       });
+  }
+
+  // Slugify
+  // params @string string a string to slugify
+  // returns a slugified string
+  // Would turn "Product Director" into "product-director"
+  _slugify(string) {
+    return string.toLowerCase()
+      .replace(/[^a-z0-9]/gi, '-') // replace everything with a dash
+      .replace(/-+/gi, '-');       // turn multiple dashes into 1
   }
 }
 
