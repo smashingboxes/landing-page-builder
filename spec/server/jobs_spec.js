@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const request = require('request-promise');
 const nock = require('nock');
+const request = require('request-promise');
 const app = require('../../server/app');
 const redisClient = require('../../server/utils/redisClient').client;
 const port = 3000;
@@ -11,7 +11,7 @@ describe('GET /jobs', () => {
   const requestOptions = { json: true };
   let server;
 
-  const mockWorkableJobs = function() {
+  const mockWorkableJobs = () => {
     return nock('https://www.workable.com/spi/v3/accounts/smashingboxes')
       .get('/jobs')
       .query({ state: 'published' });
@@ -19,10 +19,12 @@ describe('GET /jobs', () => {
 
   before(() => {
     server = app.listen(port);
+    nock.disableNetConnect();
+    nock.enableNetConnect(/localhost/);
   });
 
   beforeEach((done) => {
-    nock.restore();
+    nock.cleanAll();
     mockWorkableJobs().replyWithFile(200, './spec/fixtures/workable_jobs.json');
     mockWorkableJobs().replyWithError('should not have been called');
     redisClient.flushdb(() => { done(); });
