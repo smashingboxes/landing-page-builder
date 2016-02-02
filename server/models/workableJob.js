@@ -10,16 +10,16 @@ class WorkableJob {
       'https://www.workable.com/spi/v3/accounts/smashingboxes';
     this.requestOptions = {
       json: true,
-      qs: { state: 'published'},
-      headers: { Authorization: `Bearer ${this.token}` }
+      qs: { state: 'published' },
+      headers: { Authorization: `Bearer ${this.token}` },
+      uri: `${this.baseUrl}/jobs`
     };
     this.getPublishedJobs = this._getPublishedJobs.bind(this);
   }
 
   _getPublishedJobs() {
-    this.requestOptions.uri = `${this.baseUrl}/jobs`;
     return request(this.requestOptions)
-      .then((data) => { return data.jobs; })
+      .then(data => data.jobs)
       .then((jobs) => {
         return jobs.map((job) => {
           job.slug = job.title.toLowerCase()
