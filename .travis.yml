@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - "5.5"
+  - "4.2"
+services:
+  - redis-server
+before_script:
+  - "cp .env{.example,}"
 script:
   - npm install
   - npm test
