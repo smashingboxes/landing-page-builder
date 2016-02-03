@@ -7,6 +7,7 @@ describe('RedisClient', () => {
   const client =  redisClient.client;
   const key = 'key';
   const value = 'test';
+  const error = new Error('api fetch failed');
 
   const promiseFunction = function(promiseValue) {
     return () => { return Promise.resolve(promiseValue); };
@@ -35,8 +36,6 @@ describe('RedisClient', () => {
     });
 
     it('uses it\'s last fallback value if there is an error retrieving the key', (done) => {
-      const error = new Error('api fetch failed');
-
       redisClient.cacheFetch(key, promiseFunction(value))
         .then(() => {
           // simulate key being expired
@@ -49,6 +48,15 @@ describe('RedisClient', () => {
               })
               .catch((err) => { done(err); });
           });
+        });
+    });
+
+    it('doesn\'t fall back if the backup is null', (done) => {
+      redisClient.cacheFetch(key, promiseErrorFunction(error))
+        .then(() => done(new Error('should not make it here')))
+        .catch(err => {
+          expect(err).to.equal(error);
+          done();
         });
     });
   });
