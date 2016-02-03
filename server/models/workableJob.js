@@ -34,9 +34,7 @@ class WorkableJob {
   _jobBySlug(slug) {
     return this.getPublishedJobs()
       .then(jobs => {
-        const job = jobs.find(thisJob => {
-          return slug === thisJob.slug;
-        });
+        const job = jobs.find(thisJob => slug === thisJob.slug);
 
         if (job === undefined) {
           throw new NotFoundError(`Job, ${slug} not found.`);
