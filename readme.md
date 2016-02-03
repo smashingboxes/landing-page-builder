@@ -3,7 +3,7 @@ smashingboxes.com v3.0
 Setup
 -----
 
-- Node 5.5 or > required
+- Node 4.2 or > required
 - Roots installed globally optional
 - clone this repo down and `cd` into the folder
 - run `npm install`
@@ -44,7 +44,7 @@ _____________                      |      ---------      ---------------
 Jobs Backend App
 ----------------
 
-- Node 5.5 or > required
+- Node 4.2 or > required
 - npm install
 - Get Workable API Token and put int in your .env file (see below)
 - run npm start
