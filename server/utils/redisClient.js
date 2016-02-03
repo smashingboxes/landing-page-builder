@@ -22,7 +22,15 @@ class RedisClient {
   _resolveCacheMiss(key, promise) {
     return promise()
       .then(data => JSON.stringify(data))
-      .catch(() => this.client.getAsync(`${key}bak`))
+      .catch(err => {
+        return this.client.getAsync(`${key}bak`)
+          .then(reply => {
+            // If the backup is null, then don't fallback; there is a real
+            // problem.
+            if (reply === null) { throw err; }
+            return reply;
+          });
+      })
       .then(reply => JSON.parse(reply));
   }
 

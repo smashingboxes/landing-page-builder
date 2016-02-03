@@ -2,23 +2,59 @@
 
 require('dotenv').load();
 const request = require('request-promise');
+const redisClient = require('../utils/redisClient');
+
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.status = 404;
+  }
+}
 
 class WorkableJob {
   constructor(token, baseUrl) {
     this.token = token || process.env.WORKABLE_TOKEN;
     this.baseUrl = baseUrl ||
       'https://www.workable.com/spi/v3/accounts/smashingboxes';
-    this.requestOptions = {
-      json: true,
-      qs: { state: 'published' },
-      headers: { Authorization: `Bearer ${this.token}` },
-      uri: `${this.baseUrl}/jobs`
-    };
-    this.getPublishedJobs = this._getPublishedJobs.bind(this);
+    this.publishedJobs = this._publishedJobs.bind(this);
+    this.NotFoundError = NotFoundError;
   }
 
-  _getPublishedJobs() {
-    return request(this.requestOptions)
+  getPublishedJobs() {
+    return redisClient.cacheFetch('publishedjobs', this.publishedJobs);
+  }
+
+  getJobBySlug(slug) {
+    return redisClient.cacheFetch(
+      `jobBySlug${slug}`,
+      this._jobBySlug.bind(this, slug)
+    );
+  }
+
+  _jobBySlug(slug) {
+    return this.getPublishedJobs()
+      .then(jobs => {
+        const job = jobs.find(thisJob => slug === thisJob.slug);
+
+        if (job === undefined) {
+          throw new NotFoundError(`Job, ${slug} not found.`);
+        }
+        return job;
+      })
+      .then(job => {
+        const shortcode = job.shortcode;
+        const requestOptions = this._requestOptions();
+        requestOptions.uri = `${this.baseUrl}/jobs/${shortcode}`;
+        return request(requestOptions);
+      });
+  }
+
+  _publishedJobs() {
+    const requestOptions = this._requestOptions();
+    requestOptions.uri = `${this.baseUrl}/jobs`;
+    requestOptions.qs = { state: 'published' };
+
+    return request(requestOptions)
       .then(data => data.jobs)
       .then((jobs) => {
         return jobs.map((job) => {
@@ -27,7 +63,6 @@ class WorkableJob {
         });
       });
   }
-
   // Slugify
   // params @string string a string to slugify
   // returns a slugified string
@@ -36,6 +71,13 @@ class WorkableJob {
     return string.toLowerCase()
       .replace(/[^a-z0-9]/gi, '-') // replace everything with a dash
       .replace(/-+/gi, '-');       // turn multiple dashes into 1
+  }
+
+  _requestOptions() {
+    return {
+      json: true,
+      headers: { Authorization: `Bearer ${this.token}` }
+    };
   }
 }
 
