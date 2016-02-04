@@ -1,0 +1,13 @@
+redis:
+  image: redis
+web:
+  build: .
+  command: npm start
+  environment:
+    REDIS_HOST: redis
+  links:
+    - redis
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/sb-3-0

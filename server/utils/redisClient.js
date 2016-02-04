@@ -50,7 +50,8 @@ class RedisClient {
   }
 
   _setClient() {
-    this.client = redis.createClient();
+    const host = process.env.REDIS_HOST || '127.0.0.1';
+    this.client = redis.createClient({ host: host });
   }
 
   _closeClient() {

@@ -45,9 +45,26 @@ Jobs Backend App
 ----------------
 
 - Node 4.2 or > required
-- npm install
 - Get Workable API Token and put int in your .env file (see below)
-- run npm start
+
+### run with docker
+  - Make sure you install the docker toolbox: https://www.docker.com/products/docker-toolbox
+  - Open your terminal with the "Docker Quickstart Terminal" app
+  - or `docker-machine start default && eval "$(docker-machine env default)"`
+  - `docker-compose up`
+  - api is at `<yourdockermachineip>:3000`
+  - run tests with `docker-compose run web npm test`
+
+*Some docker cli help:*
+  - Completion: https://docs.docker.com/compose/completion/
+  - Make some aliases
+
+
+### run without docker
+```
+npm install
+npm start
+```
 
 Workable Key
 ------------
