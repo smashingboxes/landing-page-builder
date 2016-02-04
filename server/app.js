@@ -5,13 +5,15 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 
 const app = express();
-const routes = require('./routes/jobs');
+const jobRoutes = require('./routes/jobs');
+const contactRoutes = require('./routes/contact');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/jobs', routes);
+app.use('/jobs', jobRoutes);
+app.use('/contact', contactRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
