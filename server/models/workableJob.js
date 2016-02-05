@@ -31,6 +31,19 @@ class WorkableJob {
     );
   }
 
+  createApplication(slug, application) {
+    const requestOptions = this._requestOptions();
+    return this.getJobBySlug(slug).then(job => {
+      requestOptions.uri = `${this.baseUrl}/jobs/${job.shortcode}/candidates`;
+      requestOptions.body = {
+        sourced: false,
+        candidate: application.toCandidate()
+      };
+
+      return request.post(requestOptions);
+    });
+  }
+
   _jobBySlug(slug) {
     return this.getPublishedJobs()
       .then(jobs => {
