@@ -106,11 +106,11 @@ describe('Job Endpoints', () => {
       mockSingleWorkableJob().replyWithFile(200, './spec/fixtures/workable_job.json');
     });
 
-    it('posts the applicationspplication to workable', (done) => {
+    it('posts the applications to workable', (done) => {
       const fileString = fs.readFileSync('./spec/fixtures/pdf-sample.pdf')
         .toString('base64');
 
-      nock('https://www.workable.com/spi/v3/accounts/smashingboxes')
+      const workableReq = nock('https://www.workable.com/spi/v3/accounts/smashingboxes')
         .post(
           '/jobs/A02AF3EE6C/candidates',
           (body) => body.candidate.firstname === 'Lando'
@@ -133,7 +133,10 @@ describe('Job Endpoints', () => {
       };
 
       request.post(requestOptions)
-        .then(() => done())
+        .then(() => {
+          expect(workableReq.isDone()).to.equal(true);
+          done();
+        })
         .catch((err) => done(err));
     });
 

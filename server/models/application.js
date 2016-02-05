@@ -42,7 +42,7 @@ class Application {
     }
 
     if (application.personalWebsite !== undefined) {
-      socialMedia = socialMedia + `\Website: ${application.personalWebsite}`;
+      socialMedia = socialMedia + `\nWebsite: ${application.personalWebsite}`;
     }
 
     if (application.socialMedia !== undefined ) {
