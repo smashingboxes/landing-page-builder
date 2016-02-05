@@ -3,6 +3,7 @@
 const express = require('express');
 const WorkableJob = require('../models/workableJob');
 const Application = require('../models/application');
+const ValidationError = require('../utils/errors').ValidationError;
 const jobAPI = new WorkableJob();
 const router = express.Router();
 
@@ -20,13 +21,11 @@ router.get('/:slug', (req, res, next) => {
 
 router.post('/:slug/applications', (req, res, next) => {
   const application = new Application(req.body.data);
-  if (application.isValid()) {
-    jobAPI.createApplication(req.params.slug, application)
-      .then(resApp => res.status(201).json({ data: resApp }))
-      .catch(err => next(err));
-  } else {
-    res.status(422).json({ errors: application.errors });
-  }
+  application.validate()
+    .then(()=> jobAPI.createApplication(req.params.slug, application))
+    .then(resApp => res.status(201).json({ data: resApp }))
+    .catch(ValidationError, err => res.status(422).json({ errors: err.messages }))
+    .catch(err => next(err));
 });
 
 module.exports = router;

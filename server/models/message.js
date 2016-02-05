@@ -1,7 +1,6 @@
 'use strict';
 
-const BBPromise = require('bluebird');
-const ValidationError = require('../utils/errors').ValidationError;
+const validatePresence = require('../utils/validatePresence');
 const requiredFields = [
   'firstName',
   'lastName',
@@ -11,21 +10,8 @@ const requiredFields = [
 class Message {
   constructor(messageParams) {
     this._messageParams = messageParams;
-  }
-
-  validate() {
-    const errors = [];
-
-    for (const field of requiredFields) {
-      if (!this._messageParams[field]) {
-        errors.push(`Message must have ${field}.`);
-      }
-    }
-    if (errors.length !== 0) {
-      return BBPromise.reject(new ValidationError(errors));
-    }
-
-    return BBPromise.resolve(this);
+    this.validate = validatePresence
+      .bind(this, this._messageParams, requiredFields);
   }
 
   formatted() {

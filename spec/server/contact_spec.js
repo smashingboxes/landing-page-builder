@@ -7,7 +7,7 @@ const app = require('../../server/app');
 const port = 3000;
 const host = `http://localhost:${port}`;
 
-describe.only('Contact Endpoint', () => {
+describe('Contact Endpoint', () => {
   const requestOptions = { json: true };
   let server;
 
