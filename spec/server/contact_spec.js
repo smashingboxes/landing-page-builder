@@ -31,6 +31,7 @@ describe.only('Contact Endpoint', () => {
       requestOptions.uri = `${host}/contact`;
       requestOptions.body = {
         data: {
+          category: 'Project', // Projects and General
           firstName: 'James',
           lastName: 'Kirk',
           jobTitle: 'Captain',

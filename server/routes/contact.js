@@ -4,20 +4,18 @@ require('dotenv').load();
 
 const express = require('express');
 const router = express.Router();
-const apiKey = process.env.MAILGUN_KEY;
-const domain = process.env.MAILGUN_DOMAIN;
-const mailgun = require('mailgun-js')({ apiKey, domain });
+const Mailer = require('../utils/mailer');
+const Message = require('../models/message');
+const ValidationError = require('../utils/errors').ValidationError;
 
 router.post('/', (req, res, next) => {
-  const mailData = {
-    from: process.env.MAILGUN_FROM,
-    to: 'joe@smashingboxes.com',
-    subject: 'Contact Form Submitted',
-    text: JSON.stringify(req.body.data)
-  };
+  const message = new Message(req.body.data);
+  const mailer = new Mailer(message);
 
-  mailgun.messages().send(mailData)
+  message.validate()
+    .then(() => mailer.send())
     .then(() => res.status(201).json({ data: { status: 'mailed' } }))
+    .catch(ValidationError, err => res.status(422).json({ errors: err.messages }))
     .catch(err => next(err));
 });
 
