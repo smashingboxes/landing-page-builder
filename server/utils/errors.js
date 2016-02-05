@@ -7,4 +7,13 @@ class ValidationError extends Error {
   }
 }
 
-module.exports = { ValidationError };
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.status = 404;
+  }
+}
+
+class CacheMissError extends Error { }
+
+module.exports = { ValidationError, NotFoundError, CacheMissError };

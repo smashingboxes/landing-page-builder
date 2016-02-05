@@ -3,10 +3,9 @@
 const redis = require('redis');
 const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
+const CacheMissError = require('./errors').CacheMissError;
 const cacheTime = 3600; // 1 hour
 
-
-class CacheMissError extends Error { }
 
 class RedisClient {
   constructor() {
