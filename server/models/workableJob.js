@@ -3,13 +3,7 @@
 require('dotenv').load();
 const request = require('request-promise');
 const redisClient = require('../utils/redisClient');
-
-class NotFoundError extends Error {
-  constructor(message) {
-    super(message);
-    this.status = 404;
-  }
-}
+const NotFoundError = require('../utils/errors').NotFoundError;
 
 class WorkableJob {
   constructor(token, baseUrl) {
@@ -17,7 +11,6 @@ class WorkableJob {
     this.baseUrl = baseUrl ||
       'https://www.workable.com/spi/v3/accounts/smashingboxes';
     this.publishedJobs = this._publishedJobs.bind(this);
-    this.NotFoundError = NotFoundError;
   }
 
   getPublishedJobs() {

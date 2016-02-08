@@ -1,5 +1,6 @@
 'use strict';
 
+const validatePresence = require('../utils/validatePresence');
 const requiredFields = [
   'firstName',
   'lastName',
@@ -7,30 +8,21 @@ const requiredFields = [
 ];
 
 class Application {
-  constructor(applicationData) {
-    this._applicationData = applicationData;
-    this.errors = [];
-  }
-
-  isValid() {
-    for (const field of requiredFields) {
-      if (!this._applicationData[field]) {
-        this.errors.push(`Application must have ${field}.`);
-      }
-    }
-
-    return this.errors.length === 0;
+  constructor(applicationParams) {
+    this._applicationParams = applicationParams;
+    this.validate = validatePresence
+      .bind(this, this._applicationParams, requiredFields);
   }
 
   toCandidate() {
     return {
-      firstname: this._applicationData.firstName,
-      lastname: this._applicationData.lastName,
-      email: this._applicationData.email,
-      summary: this._formattedMessage(this._applicationData),
+      firstname: this._applicationParams.firstName,
+      lastname: this._applicationParams.lastName,
+      email: this._applicationParams.email,
+      summary: this._formattedMessage(this._applicationParams),
       resume: {
-        name: this._applicationData.resumeName,
-        data: this._applicationData.resume
+        name: this._applicationParams.resumeName,
+        data: this._applicationParams.resume
       }
     };
   }
