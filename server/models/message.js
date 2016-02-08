@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const ejs = require('ejs');
 const validatePresence = require('../utils/validatePresence');
 const requiredFields = [
   'firstName',
@@ -15,13 +17,10 @@ class Message {
   }
 
   formatted() {
-    return `
-From ${this._messageParams.firstName} ${this._messageParams.lastName}
-${this._messageParams.jobTitle} ${this._messageParams.company}
-
-Message:
-${this._messageParams.message}
-      `.trim();
+    const messageTemplate = fs.readFileSync(
+      './server/templates/contact_message.ejs'
+    ).toString();
+    return ejs.render(messageTemplate, this._messageParams);
   }
 }
 

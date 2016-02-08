@@ -1,0 +1,11 @@
+From <%= firstName %> <%= lastName %>
+
+<% if (locals.jobTitle) { -%>
+Job Title: <%= jobTitle %>
+<% } -%>
+<% if (locals.company) { -%>
+Company: <%= company %>
+<% } -%>
+
+Message:
+<%= message %>

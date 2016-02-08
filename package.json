@@ -7,6 +7,7 @@
     "body-parser": "~1.13.2",
     "coffee-script": "1.9.x",
     "debug": "~2.2.0",
+    "ejs": "^2.4.1",
     "express": "~4.13.1",
     "jade": "1.9.x",
     "lost": "^6.6.3",

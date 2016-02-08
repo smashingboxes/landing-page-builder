@@ -35,7 +35,7 @@ describe('Contact Endpoint', () => {
           firstName: 'James',
           lastName: 'Kirk',
           jobTitle: 'Captain',
-          compamy: 'United Federation of Planets',
+          company: 'United Federation of Planets',
           message: 'KHAAAAAAAAAAAAAAAAAAAAAAN!'
         }
       };
