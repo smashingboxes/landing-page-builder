@@ -70,3 +70,9 @@ Workable Key
 ------------
 
 Can be found on passpack.
+
+Tape Deploy
+-----------
+`bundle exec tape ansible docker_deploy --vault-password-file .vault_pass.txt`
+
+Get the vault password from passpack.
