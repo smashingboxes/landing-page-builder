@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/smashingboxes/taperole.git
-  revision: c4869e1396868d15c24b1a78f9ddb754061d5951
+  revision: 00d8f8cdcbb01500b634ece791b83b3170629e08
   branch: feature/docker-support
   specs:
     taperole (1.4.1)
