@@ -1,0 +1,21 @@
+GIT
+  remote: git://github.com/smashingboxes/taperole.git
+  revision: c4869e1396868d15c24b1a78f9ddb754061d5951
+  branch: feature/docker-support
+  specs:
+    taperole (1.4.1)
+      slack-notifier (~> 1.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    slack-notifier (1.5.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  taperole!
+
+BUNDLED WITH
+   1.11.2

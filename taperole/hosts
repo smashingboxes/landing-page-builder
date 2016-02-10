@@ -4,4 +4,4 @@
 
 # Vagrant Example
 [omnibox]
-localhost:2222 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key docker_app_branch=master
+localhost:2222 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key docker_app_branch="features/docker"
