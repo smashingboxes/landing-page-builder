@@ -8,4 +8,6 @@
   user: "{{ deployer_user.name }}"
 
   roles:
+    - docker_checkout
+    - sb-secrets
     - docker_deploy
