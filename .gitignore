@@ -4,3 +4,4 @@ public
 .env
 ship.conf
 npm-debug.log
+.tape
