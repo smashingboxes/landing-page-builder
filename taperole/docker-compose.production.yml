@@ -12,7 +12,15 @@ web:
   command: npm start
   environment:
     REDIS_HOST: redis
+    NODE_ENV: production
   links:
     - redis
   ports:
     - "80:3000"
+  volumes_from:
+    - data
+
+data:
+  image: tianon/true
+  volumes:
+    - /sb-3-0/logs
