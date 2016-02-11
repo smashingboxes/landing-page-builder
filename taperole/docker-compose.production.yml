@@ -12,7 +12,7 @@ web:
   command: npm start
   environment:
     REDIS_HOST: redis
-    NODE_ENV: production
+    # NODE_ENV: production
   links:
     - redis
   ports:
