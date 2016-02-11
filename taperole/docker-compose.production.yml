@@ -10,9 +10,10 @@ redis:
 web:
   build: .
   command: npm start
+  restart: always
   environment:
     REDIS_HOST: redis
-    # NODE_ENV: production
+    NODE_ENV: production
   links:
     - redis
   ports:
