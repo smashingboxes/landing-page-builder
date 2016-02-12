@@ -1,0 +1,7 @@
+# # Base Example
+# [omnibox]
+# 0.0.0.0 be_app_env=SOME_ENV be_app_branch=SOME_BRANCH 
+
+# Vagrant Example
+[omnibox]
+162.243.240.202 docker_app_branch="master"

@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -8,7 +9,13 @@ const app = express();
 const jobRoutes = require('./routes/jobs');
 const contactRoutes = require('./routes/contact');
 
-app.use(logger('dev'));
+if (app.get('env') === 'production') {
+  const logfile = fs.createWriteStream('logs/production.log', { flags: 'a' });
+  app.use(logger('combined', { stream: logfile }));
+} else {
+  app.use(logger('dev'));
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

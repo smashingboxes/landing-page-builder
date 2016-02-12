@@ -1,0 +1,4 @@
+app_name: sb-3-0
+
+# App Configs
+docker_app_repo: git@github.com:smashingboxes/sb-3-0.git

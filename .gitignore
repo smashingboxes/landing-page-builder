@@ -4,3 +4,7 @@ public
 .env
 ship.conf
 npm-debug.log
+.tape
+.vagrant
+.vault_pass.txt
+Vagrantfile

@@ -1,0 +1,27 @@
+# Production Docker Setup Node
+# Redis
+redis:
+  image: redis
+
+# Postgres
+# db:
+#   image: postgres
+
+web:
+  build: .
+  command: npm start
+  restart: always
+  environment:
+    REDIS_HOST: redis
+    NODE_ENV: production
+  links:
+    - redis
+  ports:
+    - "80:3000"
+  volumes_from:
+    - data
+
+data:
+  image: tianon/true
+  volumes:
+    - /sb-3-0/logs
