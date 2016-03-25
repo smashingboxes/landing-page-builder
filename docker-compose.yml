@@ -10,4 +10,4 @@ web:
   ports:
     - "3000:3000"
   volumes:
-    - .:/sb-3-0
+    - .:/app

@@ -1,4 +1,5 @@
-smashingboxes.com v3.0
+Landing Page Builder
+Forked from previous project to be put to use as a more generic option.
 
 Setup
 -----
