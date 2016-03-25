@@ -1,6 +1,6 @@
 {
-  "name": "sb-3-0",
-  "description": "Smashing Boxes Website",
+  "name": "landing-page-builder",
+  "description": "Landing Page Builder",
   "dependencies": {
     "accord": "^0.21.0",
     "bluebird": "^3.2.1",
@@ -34,7 +34,7 @@
     "dotenv": "^1.2.0",
     "eslint": "^1.10.3",
     "mocha": "^2.4.4",
-    "nock": "^7.0.2",
+    "nock": "7.0.x",
     "nodemon": "^1.8.1"
   },
   "scripts": {
